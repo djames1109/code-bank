@@ -1,4 +1,9 @@
 >>
 
 Setting up Kafka in Local
-> https://www.baeldung.com/ops/kafka-docker-setup
+> references:
+ - https://www.baeldung.com/ops/kafka-docker-setup
+
+=========================
+
+

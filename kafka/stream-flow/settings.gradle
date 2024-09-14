@@ -1,0 +1,4 @@
+rootProject.name = 'stream-flow'
+
+include 'command'
+include 'router'
