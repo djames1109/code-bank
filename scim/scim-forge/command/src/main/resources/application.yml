@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: scim-forge-command
+
+server:
+  port: 8080
+  servlet:
+    context-path: /scim-forge/command/api
