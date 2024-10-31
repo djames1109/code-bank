@@ -1,0 +1,6 @@
+spring:
+  shell:
+    interactive:
+      enabled: true
+server:
+  port: 8010

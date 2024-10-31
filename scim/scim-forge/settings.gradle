@@ -1,3 +1,4 @@
 rootProject.name = 'scim-forge'
 
 include 'command'
+include 'pojo-creator'
