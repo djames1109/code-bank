@@ -1,4 +1,4 @@
-package org.castle.djames.scimforge.command.controller;
+package org.castle.djames.scimforge.api.controller;
 
 import de.captaingoldfish.scim.sdk.common.constants.HttpHeader;
 import de.captaingoldfish.scim.sdk.common.constants.enums.HttpMethod;
@@ -8,7 +8,7 @@ import de.captaingoldfish.scim.sdk.server.endpoints.ResourceEndpoint;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.castle.djames.scimforge.command.config.ScimAuthentication;
+import org.castle.djames.scimforge.api.config.ScimAuthentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Enumeration;

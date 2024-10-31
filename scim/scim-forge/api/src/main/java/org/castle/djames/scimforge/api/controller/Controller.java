@@ -1,4 +1,4 @@
-package org.castle.djames.scimforge.command.controller;
+package org.castle.djames.scimforge.api.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

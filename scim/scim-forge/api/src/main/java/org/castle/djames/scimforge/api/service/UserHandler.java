@@ -1,4 +1,4 @@
-package org.castle.djames.scimforge.command.service;
+package org.castle.djames.scimforge.api.service;
 
 import de.captaingoldfish.scim.sdk.common.constants.enums.SortOrder;
 import de.captaingoldfish.scim.sdk.common.exceptions.ConflictException;

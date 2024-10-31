@@ -1,4 +1,4 @@
-package org.castle.djames.scimforge.command.config;
+package org.castle.djames.scimforge.api.config;
 
 import de.captaingoldfish.scim.sdk.server.endpoints.authorize.Authorization;
 

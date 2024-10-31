@@ -1,4 +1,4 @@
-package org.castle.djames.scimforge.command.config;
+package org.castle.djames.scimforge.api.config;
 
 import de.captaingoldfish.scim.sdk.common.resources.ServiceProvider;
 import de.captaingoldfish.scim.sdk.common.resources.complex.*;
@@ -7,7 +7,7 @@ import de.captaingoldfish.scim.sdk.server.endpoints.ResourceEndpoint;
 import de.captaingoldfish.scim.sdk.server.endpoints.base.UserEndpointDefinition;
 import de.captaingoldfish.scim.sdk.server.schemas.ResourceType;
 import de.captaingoldfish.scim.sdk.server.schemas.custom.ResourceTypeFeatures;
-import org.castle.djames.scimforge.command.service.UserHandler;
+import org.castle.djames.scimforge.api.service.UserHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
