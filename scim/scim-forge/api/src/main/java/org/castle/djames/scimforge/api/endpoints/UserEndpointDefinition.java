@@ -7,12 +7,12 @@ import de.captaingoldfish.scim.sdk.common.utils.JsonHelper;
 import de.captaingoldfish.scim.sdk.server.endpoints.EndpointDefinition;
 import de.captaingoldfish.scim.sdk.server.endpoints.ResourceHandler;
 
-import org.castle.djames.scimforge.api.resources.User;
+import org.castle.djames.scimforge.api.resources.UserResource;
 
 public class UserEndpointDefinition extends EndpointDefinition
 {
 
-  public UserEndpointDefinition(ResourceHandler<User> resourceHandler)
+  public UserEndpointDefinition(ResourceHandler<UserResource> resourceHandler)
   {
     super(JsonHelper.loadJsonDocument("/scim/UserResourceType.json"),
           JsonHelper.loadJsonDocument("/scim/UserResource.json"),

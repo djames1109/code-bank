@@ -64,7 +64,7 @@
       ]
     },
     {
-      "name": "emails",
+      "name": "email",
       "type": "string",
       "description": "Email address for the User.",
       "mutability": "readWrite",

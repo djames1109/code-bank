@@ -7,8 +7,8 @@ import de.captaingoldfish.scim.sdk.server.endpoints.ResourceEndpoint;
 import de.captaingoldfish.scim.sdk.server.schemas.ResourceType;
 import de.captaingoldfish.scim.sdk.server.schemas.custom.ResourceTypeFeatures;
 import org.castle.djames.scimforge.api.endpoints.UserEndpointDefinition;
+import org.castle.djames.scimforge.api.repository.UserRepository;
 import org.castle.djames.scimforge.api.resourcehandler.UserResourceHandler;
-import org.castle.djames.scimforge.api.service.UserHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -57,10 +57,16 @@ public class WebAppConfig {
      * @return the user resource type
      */
     @Bean
-    public ResourceType getUserResourceType(ResourceEndpoint resourceEndpoint) {
-        ResourceType userResourceType = resourceEndpoint.registerEndpoint(new UserEndpointDefinition(new UserResourceHandler()));
+    public ResourceType getUserResourceType(ResourceEndpoint resourceEndpoint,
+                                            UserResourceHandler userResourceHandler) {
+        ResourceType userResourceType = resourceEndpoint.registerEndpoint(new UserEndpointDefinition(userResourceHandler));
         userResourceType.setFeatures(ResourceTypeFeatures.builder().autoFiltering(true).autoSorting(true).build());
         return userResourceType;
+    }
+
+    @Bean
+    public UserResourceHandler getUserResourceHandler(UserRepository userRepository) {
+        return new UserResourceHandler(userRepository);
     }
 
 //  /**
