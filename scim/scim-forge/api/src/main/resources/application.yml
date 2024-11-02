@@ -1,6 +1,16 @@
 spring:
   application:
     name: scim-forge-command
+  datasource:
+    url: jdbc:postgresql://localhost:5432/scimforge_db
+    username: scimforge_admin
+    password: password
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+        default_schema: scimforge_schema
 
 server:
   port: 8080
