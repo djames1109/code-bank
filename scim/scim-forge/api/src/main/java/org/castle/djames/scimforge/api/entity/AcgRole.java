@@ -24,8 +24,7 @@ public class AcgRole {
     private String parentAccessGroup;
 
     @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "acg_role_id")
+    @OneToMany(mappedBy = "acgRole", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<AcgRoleUserMapping> acgRoleUserMapping;
 
 }

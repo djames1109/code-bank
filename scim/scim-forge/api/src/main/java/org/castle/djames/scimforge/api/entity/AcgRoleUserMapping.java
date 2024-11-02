@@ -15,13 +15,11 @@ public class AcgRoleUserMapping {
     @JsonBackReference
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
     private User user;
 
     @JsonBackReference
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "acg_role_id")
     private AcgRole acgRole;
 
 }
