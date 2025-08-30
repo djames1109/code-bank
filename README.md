@@ -1,7 +1,5 @@
 # Code Bank
 
-## Description
-
 This repository is a collection of code patterns, sample codes, and reusable components that can be referenced for future projects. It serves as a knowledge base for various programming techniques, design patterns, and implementation examples across different technologies.
 
 ## Purpose
@@ -24,10 +22,7 @@ This approach simplifies content organization and makes it easier to reference i
 
 ## Contents
 
-| Project | Description | Technologies |
-|---------|-------------|---------------|
-| *No projects yet* | | |
+| Project | Description | Technologies | Notable Features |
+|---------|-------------|---------------|------------------|
+| *No projects yet* | | | |
 
-## License
-
-This repository is for personal/team use. Please ensure you have the right to use and share any code you contribute.
