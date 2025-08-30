@@ -1,4 +1,0 @@
-rootProject.name = 'scim-forge'
-
-include 'api'
-include 'pojo-creator'

@@ -1,8 +1,0 @@
-spring:
-  application:
-    name: stream-flow-command
-
-server:
-  port: 8080
-  servlet:
-    context-path: /stream-flow/command/api
