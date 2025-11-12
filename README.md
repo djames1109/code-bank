@@ -22,7 +22,7 @@ This approach simplifies content organization and makes it easier to reference i
 
 ## Contents
 
-| Project | Description | Technologies | Notable Features |
-|---------|-------------|---------------|------------------|
-| *No projects yet* | | | |
+| Project        | Description                                                                                                               | Technologies                                                             | Notable Features                                                                                                                                                  |
+|----------------|---------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Project Zephyr | Microservice system inspired by modern banking platforms, built to explore Quarkus and cloud-native development concepts. | • Quarkus<br>• Java 21<br>• Postgresql<br>• Redis<br>• Kafka<br>• Docker | • Microservice architecture<br>• Security and Authentication<br>• Caching<br>• Multi-Datasource setup<br>• External API integration<br>• Containerized Deployment |
 
