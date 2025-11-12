@@ -1,0 +1,10 @@
+title Update Customer Information
+
+User->API Gateway: PUT /api/customers/{id} (JWT, update payload)
+API Gateway->API Gateway: Validate JWT (Auth public key)
+API Gateway->Customer Service: Forward request /api/customers/{id}
+Customer Service->PostgreSQL (Customer DB): UPDATE customers SET ... WHERE id = {id}
+PostgreSQL (Customer DB)-->Customer Service: OK
+Customer Service->Redis: DEL customer:{id} (invalidate cache)
+Customer Service-->API Gateway: 200 OK { id, status: "UPDATED" }
+API Gateway-->User: 200 OK { id, status: "UPDATED" }

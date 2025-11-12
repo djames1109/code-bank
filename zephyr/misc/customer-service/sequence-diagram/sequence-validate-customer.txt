@@ -1,0 +1,12 @@
+title Validate Customer (for Account Service)
+
+Account Service->Customer Service: GET /api/customers/{id}/validate (service JWT)
+Customer Service->Redis: GET customer:{id}
+alt Cache hit
+    Redis-->Customer Service: profile summary
+else Cache miss
+    Customer Service->PostgreSQL (Customer DB): SELECT id, kyc_status FROM customers WHERE id = {id}
+    PostgreSQL (Customer DB)-->Customer Service: { id, kycStatus }
+    Customer Service->Redis: SET customer:{id} (TTL)
+end
+Customer Service-->Account Service: 200 OK { id, exists: true, kycStatus: "VERIFIED" }

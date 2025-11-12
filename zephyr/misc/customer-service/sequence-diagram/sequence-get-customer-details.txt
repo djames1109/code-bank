@@ -1,0 +1,15 @@
+title Get Customer Details (with Cache)
+
+User->API Gateway: GET /api/customers/{id} (JWT)
+API Gateway->API Gateway: Validate JWT (Auth public key)
+API Gateway->Customer Service: Forward request /api/customers/{id}
+Customer Service->Redis: GET customer:{id}
+alt Cache hit
+    Redis-->Customer Service: profile
+else Cache miss
+    Customer Service->PostgreSQL (Customer DB): SELECT * FROM customers WHERE id = {id}
+    PostgreSQL (Customer DB)-->Customer Service: profile
+    Customer Service->Redis: SET customer:{id} = profile (TTL)
+end
+Customer Service-->API Gateway: 200 OK (profile)
+API Gateway-->User: 200 OK (profile)

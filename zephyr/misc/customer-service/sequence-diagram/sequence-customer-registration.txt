@@ -1,0 +1,13 @@
+title Customer Registration (with KYC Verification)
+
+User->API Gateway: POST /api/customers (JWT, profile payload)
+API Gateway->API Gateway: Validate JWT (Auth public key)
+API Gateway->Customer Service: Forward request (profile payload)
+note over Customer Service: Build KYC request from submitted profile
+Customer Service->External KYC API: POST /kyc/verify
+External KYC API-->Customer Service: 200 OK (status, document info, refId)
+Customer Service->PostgreSQL (Customer DB): INSERT customer + KYC fields
+PostgreSQL (Customer DB)-->Customer Service: OK (id)
+Customer Service->Redis: SET customer:{id} = profile (TTL)
+Customer Service-->API Gateway: 201 Created { id, kycStatus }
+API Gateway-->User: 201 Created { id, kycStatus }
