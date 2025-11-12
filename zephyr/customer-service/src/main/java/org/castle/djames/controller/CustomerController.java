@@ -2,11 +2,13 @@ package org.castle.djames.controller;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import lombok.RequiredArgsConstructor;
 import org.castle.djames.dto.CustomerDetailResponse;
 import org.castle.djames.dto.CustomerRequest;
 import org.castle.djames.dto.CustomerValidationResponse;
 import org.castle.djames.service.CustomerService;
 
+@RequiredArgsConstructor
 @Path("/api/customers")
 public class CustomerController {
 
