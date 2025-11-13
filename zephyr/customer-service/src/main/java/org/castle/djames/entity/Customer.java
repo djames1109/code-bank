@@ -1,17 +1,22 @@
 package org.castle.djames.entity;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Entity
-public class Customer extends PanacheEntity {
+public class Customer extends PanacheEntityBase {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
     public String firstName;
     public String lastName;
     public String nationalId;
@@ -28,15 +33,4 @@ public class Customer extends PanacheEntity {
     @UpdateTimestamp
     public Instant updatedDate;
 
-    public static Optional<Customer> findById(String id) {
-        return findByIdOptional(id);
-    }
-
-    public static Optional<Customer> findByNationalId(String nationalId) {
-        return find("nationalId", nationalId).firstResultOptional();
-    }
-
-    public static Optional<Customer> findByEmail(String email) {
-        return find("email", email).firstResultOptional();
-    }
 }

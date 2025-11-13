@@ -5,14 +5,15 @@ import jakarta.ws.rs.core.MediaType;
 import lombok.RequiredArgsConstructor;
 import org.castle.djames.dto.CustomerDetailResponse;
 import org.castle.djames.dto.CustomerRequest;
-import org.castle.djames.dto.CustomerValidationResponse;
-import org.castle.djames.service.CustomerService;
+import org.castle.djames.service.CommandService;
 
 @RequiredArgsConstructor
-@Path("/api/customers")
-public class CustomerController {
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+@Path("/api/v1/customers")
+public class CommandController {
 
-    private final CustomerService customerService;
+    private final CommandService commandService;
 
     /**
      * Handles customer onboarding by accepting customer details in the request
@@ -26,8 +27,6 @@ public class CustomerController {
      * KYC status, and timestamps.
      */
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     public CustomerDetailResponse onboardCustomer(CustomerRequest request) {
 
         return null;
@@ -44,39 +43,7 @@ public class CustomerController {
      * such as ID, name, contact details, KYC status, and timestamps.
      */
     @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     public CustomerDetailResponse updateCustomer(CustomerRequest request) {
-        return null;
-    }
-
-
-    /**
-     * Retrieves the details of a specific customer based on their unique identifier.
-     *
-     * @param id the unique identifier of the customer whose details are to be fetched
-     * @return a {@link CustomerDetailResponse} containing detailed information
-     * about the customer, such as ID, name, email, phone, KYC status, and
-     * timestamps
-     */
-    @GET
-    @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public CustomerDetailResponse getCustomerDetails(@PathParam("id") String id) {
-        return null;
-    }
-
-    /**
-     * Validates the existence and KYC status of a customer based on their unique identifier.
-     *
-     * @param id the unique identifier of the customer to validate
-     * @return a {@link CustomerValidationResponse} containing the customer ID,
-     * existence flag, and KYC status
-     */
-    @GET
-    @Path("/validate/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public CustomerValidationResponse validateCustomer(@PathParam("id") String id) {
         return null;
     }
 
