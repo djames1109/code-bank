@@ -1,0 +1,137 @@
+openapi: 3.0.1
+info:
+  title: External KYC API
+  version: 1.0.0
+  description: |
+    Mock KYC verification service used by Zephyr Customer Service.
+    This API allows registering a user for KYC verification and retrieving their KYC status.
+
+servers:
+  - url: https://mock.kycapi.io/v1
+    description: Mock server (Microcks)
+
+paths:
+  /kyc/register:
+    post:
+      summary: Register a user for KYC verification
+      description: Accepts customer details and returns a simulated verification result.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [firstName, lastName, nationalId, birthDate, email]
+              properties:
+                firstName:
+                  type: string
+                  example: Alice
+                lastName:
+                  type: string
+                  example: Tan
+                nationalId:
+                  type: string
+                  example: AB1234567
+                birthDate:
+                  type: string
+                  format: date
+                  example: 1990-01-01
+                email:
+                  type: string
+                  format: email
+                  example: alice@email.com
+      responses:
+        "200":
+          description: KYC verification completed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [VERIFIED, REJECTED, PENDING]
+                  referenceId:
+                    type: string
+                    example: kyc-req-9923
+                  details:
+                    type: object
+                    properties:
+                      documentIssued:
+                        type: string
+                        format: date
+                        example: 2020-01-01
+                      documentExpiry:
+                        type: string
+                        format: date
+                        example: 2030-01-01
+                      reason:
+                        type: string
+                        example: Invalid document
+              examples:
+                verified:
+                  summary: Verified identity
+                  value:
+                    status: VERIFIED
+                    referenceId: kyc-req-001
+                    details:
+                      documentIssued: 2020-01-01
+                      documentExpiry: 2030-01-01
+                rejected:
+                  summary: Rejected identity
+                  value:
+                    status: REJECTED
+                    referenceId: kyc-req-002
+                    details:
+                      reason: Invalid document
+
+  /kyc/status/{nationalId}:
+    get:
+      summary: Get KYC verification status
+      description: Returns the verification status of a user by national ID.
+      parameters:
+        - name: nationalId
+          in: path
+          required: true
+          description: National ID of the user
+          schema:
+            type: string
+            example: AB1234567
+      responses:
+        "200":
+          description: KYC status found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nationalId:
+                    type: string
+                    example: AB1234567
+                  status:
+                    type: string
+                    enum: [VERIFIED, REJECTED, PENDING]
+                  lastChecked:
+                    type: string
+                    format: date-time
+                    example: 2025-11-12T08:30:00Z
+              examples:
+                verified:
+                  summary: Verified
+                  value:
+                    nationalId: AB1234567
+                    status: VERIFIED
+                    lastChecked: 2025-11-12T08:30:00Z
+                pending:
+                  summary: Pending
+                  value:
+                    nationalId: XY9876543
+                    status: PENDING
+                    lastChecked: 2025-11-10T15:00:00Z
+        "404":
+          description: No KYC record found
+          content:
+            application/json:
+              example:
+                message: "No KYC record found for given ID"
+
