@@ -1,5 +1,7 @@
 package org.castle.djames.dto;
 
+import org.castle.djames.entity.KycStatus;
+
 import java.time.Instant;
 
 public record CustomerDetailResponse(
@@ -8,9 +10,9 @@ public record CustomerDetailResponse(
         String lastName,
         String email,
         String phone,
-        String kycStatus, // make enum
+        KycStatus kycStatus,
         Instant kycIssuedDate,
         Instant kycExpiryDate,
-        Instant createdAt,
-        Instant updatedAt) {
+        Instant createdDate,
+        Instant updatedDate) {
 }
