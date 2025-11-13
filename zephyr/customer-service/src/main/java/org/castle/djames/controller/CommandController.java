@@ -2,18 +2,18 @@ package org.castle.djames.controller;
 
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.castle.djames.dto.CustomerDetailResponse;
 import org.castle.djames.dto.CustomerRequest;
 import org.castle.djames.service.CommandService;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/api/v1/customers")
 public class CommandController {
 
-    private final CommandService commandService;
+    private CommandService commandService;
 
     /**
      * Handles customer onboarding by accepting customer details in the request

@@ -1,9 +1,11 @@
 package org.castle.djames.dto;
 
+import lombok.Builder;
 import org.castle.djames.entity.KycStatus;
 
 import java.time.Instant;
 
+@Builder
 public record CustomerDetailResponse(
         Long id,
         String firstName,
