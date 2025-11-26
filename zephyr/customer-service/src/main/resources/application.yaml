@@ -1,4 +1,6 @@
 quarkus:
   rest-client:
+    logging:
+      scope: request-response
     kyc-service:
       url: http://localhost:9080/rest/External+KYC+API/1.0.0

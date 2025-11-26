@@ -8,7 +8,6 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 @RegisterRestClient(configKey = "kyc-service")
 public interface KycService {
 
-
     @POST
     @Path("/register")
     KycRegisterResponse register(KycRegisterRequest request);
