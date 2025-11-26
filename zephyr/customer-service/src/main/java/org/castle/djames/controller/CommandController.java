@@ -3,11 +3,13 @@ package org.castle.djames.controller;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.castle.djames.dto.CustomerDetailResponse;
 import org.castle.djames.dto.CustomerRequest;
 import org.castle.djames.service.CommandService;
 import org.jboss.resteasy.reactive.RestResponse;
 
+@Slf4j
 @AllArgsConstructor
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -29,8 +31,10 @@ public class CommandController {
      */
     @POST
     public RestResponse<CustomerDetailResponse> onboardCustomer(CustomerRequest request) {
-
-        return RestResponse.ok();
+        log.info("Received request to onboard customer: {}", request);
+        var response = commandService.onboardCustomer(request);
+        log.info("Customer onboarded successfully: {}", response);
+        return RestResponse.ok(response);
     }
 
 

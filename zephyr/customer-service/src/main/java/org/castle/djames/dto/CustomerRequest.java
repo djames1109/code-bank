@@ -10,7 +10,7 @@ public record CustomerRequest(
         @NotBlank(groups = {AddCustomerGroup.class}) String firstName,
         @NotBlank(groups = {AddCustomerGroup.class}) String lastName,
         @NotBlank(groups = {AddCustomerGroup.class}) String nationalId,
-        @NotBlank(groups = {AddCustomerGroup.class}) LocalDate birtDate,
+        @NotBlank(groups = {AddCustomerGroup.class}) LocalDate birthDate,
         @NotBlank(groups = {AddCustomerGroup.class}) @Email String email,
         @NotBlank(groups = {AddCustomerGroup.class}) String phone,
         @NotBlank(groups = {AddCustomerGroup.class}) String address) {

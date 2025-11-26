@@ -29,3 +29,5 @@ replay_pid*
 .png
 .jpeg
 .jpg
+
+.quarkus/
