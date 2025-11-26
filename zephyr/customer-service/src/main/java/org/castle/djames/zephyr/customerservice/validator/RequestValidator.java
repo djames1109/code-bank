@@ -1,9 +1,9 @@
-package org.castle.djames.validator;
+package org.castle.djames.zephyr.customerservice.validator;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.validation.Validator;
 import lombok.AllArgsConstructor;
-import org.castle.djames.exception.ValidationException;
+import org.castle.djames.zephyr.customerservice.exception.ValidationException;
 
 @AllArgsConstructor
 @ApplicationScoped

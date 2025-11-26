@@ -1,4 +1,4 @@
-package org.castle.djames.service.biz.externalkyc;
+package org.castle.djames.zephyr.customerservice.service.biz.externalkyc;
 
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;

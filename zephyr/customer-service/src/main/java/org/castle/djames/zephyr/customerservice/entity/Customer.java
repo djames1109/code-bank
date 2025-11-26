@@ -1,4 +1,4 @@
-package org.castle.djames.entity;
+package org.castle.djames.zephyr.customerservice.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Entity;

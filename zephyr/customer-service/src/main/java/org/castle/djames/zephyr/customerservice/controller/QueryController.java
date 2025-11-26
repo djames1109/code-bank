@@ -1,4 +1,4 @@
-package org.castle.djames.controller;
+package org.castle.djames.zephyr.customerservice.controller;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -6,10 +6,10 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import lombok.AllArgsConstructor;
-import org.castle.djames.dto.CustomerDetailResponse;
-import org.castle.djames.dto.CustomerValidationResponse;
-import org.castle.djames.entity.KycStatus;
-import org.castle.djames.service.QueryService;
+import org.castle.djames.zephyr.customerservice.dto.CustomerDetailResponse;
+import org.castle.djames.zephyr.customerservice.dto.CustomerValidationResponse;
+import org.castle.djames.zephyr.customerservice.entity.KycStatus;
+import org.castle.djames.zephyr.customerservice.service.QueryService;
 
 @AllArgsConstructor
 @Produces(MediaType.APPLICATION_JSON)

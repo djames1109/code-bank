@@ -1,4 +1,4 @@
-package org.castle.djames.dto;
+package org.castle.djames.zephyr.customerservice.dto;
 
 public record CustomerValidationResponse(
         Long id,

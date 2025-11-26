@@ -1,9 +1,9 @@
-package org.castle.djames.dto;
+package org.castle.djames.zephyr.customerservice.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import org.castle.djames.validator.groups.AddCustomerGroup;
+import org.castle.djames.zephyr.customerservice.validator.groups.AddCustomerGroup;
 
 import java.time.LocalDate;
 

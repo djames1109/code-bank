@@ -1,4 +1,4 @@
-package org.castle.djames.exception;
+package org.castle.djames.zephyr.customerservice.exception;
 
 public class BaseZephyrException extends RuntimeException {
     public BaseZephyrException(String message) {

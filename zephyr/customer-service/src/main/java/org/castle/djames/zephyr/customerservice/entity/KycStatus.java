@@ -1,4 +1,4 @@
-package org.castle.djames.entity;
+package org.castle.djames.zephyr.customerservice.entity;
 
 public enum KycStatus {
     PENDING,

@@ -1,12 +1,12 @@
-package org.castle.djames.service;
+package org.castle.djames.zephyr.customerservice.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import org.castle.djames.dto.CustomerDetailResponse;
-import org.castle.djames.dto.CustomerRequest;
-import org.castle.djames.entity.KycStatus;
-import org.castle.djames.service.biz.externalkyc.KycRegisterRequest;
-import org.castle.djames.service.biz.externalkyc.KycRegisterResponse;
-import org.castle.djames.service.biz.externalkyc.KycService;
+import org.castle.djames.zephyr.customerservice.dto.CustomerDetailResponse;
+import org.castle.djames.zephyr.customerservice.dto.CustomerRequest;
+import org.castle.djames.zephyr.customerservice.entity.KycStatus;
+import org.castle.djames.zephyr.customerservice.service.biz.externalkyc.KycRegisterRequest;
+import org.castle.djames.zephyr.customerservice.service.biz.externalkyc.KycRegisterResponse;
+import org.castle.djames.zephyr.customerservice.service.biz.externalkyc.KycService;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.time.Instant;

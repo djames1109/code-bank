@@ -1,7 +1,7 @@
-package org.castle.djames.dto;
+package org.castle.djames.zephyr.customerservice.dto;
 
 import lombok.Builder;
-import org.castle.djames.entity.KycStatus;
+import org.castle.djames.zephyr.customerservice.entity.KycStatus;
 
 import java.time.Instant;
 

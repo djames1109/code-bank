@@ -1,4 +1,4 @@
-package org.castle.djames.service.biz.interceptor;
+package org.castle.djames.zephyr.customerservice.service.biz.interceptor;
 
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;

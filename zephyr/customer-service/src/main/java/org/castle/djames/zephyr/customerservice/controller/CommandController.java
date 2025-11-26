@@ -1,15 +1,15 @@
-package org.castle.djames.controller;
+package org.castle.djames.zephyr.customerservice.controller;
 
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.castle.djames.dto.CustomerDetailResponse;
-import org.castle.djames.dto.CustomerRequest;
-import org.castle.djames.service.CommandService;
-import org.castle.djames.validator.RequestValidator;
-import org.castle.djames.validator.groups.AddCustomerGroup;
+import org.castle.djames.zephyr.customerservice.dto.CustomerDetailResponse;
+import org.castle.djames.zephyr.customerservice.dto.CustomerRequest;
+import org.castle.djames.zephyr.customerservice.service.CommandService;
+import org.castle.djames.zephyr.customerservice.validator.RequestValidator;
+import org.castle.djames.zephyr.customerservice.validator.groups.AddCustomerGroup;
 import org.jboss.resteasy.reactive.RestResponse;
 
 @Slf4j
