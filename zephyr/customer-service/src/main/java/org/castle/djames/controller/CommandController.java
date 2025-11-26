@@ -1,7 +1,8 @@
 package org.castle.djames.controller;
 
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.castle.djames.dto.CustomerDetailResponse;
@@ -11,8 +12,6 @@ import org.jboss.resteasy.reactive.RestResponse;
 
 @Slf4j
 @AllArgsConstructor
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
 @Path("/api/v1/customers")
 public class CommandController {
 
