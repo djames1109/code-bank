@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.castle.djames.dto.CustomerDetailResponse;
 import org.castle.djames.dto.CustomerRequest;
 import org.castle.djames.service.CommandService;
+import org.jboss.resteasy.reactive.RestResponse;
 
 @AllArgsConstructor
 @Consumes(MediaType.APPLICATION_JSON)
@@ -27,9 +28,9 @@ public class CommandController {
      * KYC status, and timestamps.
      */
     @POST
-    public CustomerDetailResponse onboardCustomer(CustomerRequest request) {
+    public RestResponse<CustomerDetailResponse> onboardCustomer(CustomerRequest request) {
 
-        return null;
+        return RestResponse.ok();
     }
 
 

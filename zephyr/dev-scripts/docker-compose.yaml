@@ -1,0 +1,31 @@
+services:
+  mongodb:
+    image: mongo:5.0
+    container_name: microcks-mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: microcks
+      MONGO_INITDB_ROOT_PASSWORD: microcks
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  microcks:
+    image: quay.io/microcks/microcks:latest
+    container_name: microcks
+    restart: always
+    depends_on:
+      - mongodb
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATA_MONGODB_URI: mongodb://microcks:microcks@microcks-mongo:27017/admin
+      KEYCLOAK_ENABLED: "false"
+    ports:
+      - "9080:8080"
+    volumes:
+      - microcks_data:/data
+
+volumes:
+  mongo_data:
+  microcks_data:

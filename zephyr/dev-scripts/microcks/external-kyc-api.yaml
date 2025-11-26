@@ -2,9 +2,7 @@ openapi: 3.0.1
 info:
   title: External KYC API
   version: 1.0.0
-  description: |
-    Mock KYC verification service used by Zephyr Customer Service.
-    This API allows registering a user for KYC verification and retrieving their KYC status.
+  description: Mock KYC verification service used by Zephyr Customer Service.
 
 servers:
   - url: https://mock.kycapi.io/v1
@@ -15,6 +13,10 @@ paths:
     post:
       summary: Register a user for KYC verification
       description: Accepts customer details and returns a simulated verification result.
+      x-microcks:
+        dispatch: JSON_BODY
+        dispatchRules:
+          - "$.nationalId"
       requestBody:
         required: true
         content:
@@ -39,7 +41,7 @@ paths:
                 email:
                   type: string
                   format: email
-                  example: alice@email.com
+                  example: alice.tan@example.com
       responses:
         "200":
           description: KYC verification completed
@@ -60,14 +62,11 @@ paths:
                       documentIssued:
                         type: string
                         format: date
-                        example: 2020-01-01
                       documentExpiry:
                         type: string
                         format: date
-                        example: 2030-01-01
                       reason:
                         type: string
-                        example: Invalid document
               examples:
                 verified:
                   summary: Verified identity
@@ -77,6 +76,8 @@ paths:
                     details:
                       documentIssued: 2020-01-01
                       documentExpiry: 2030-01-01
+                  x-microcks:
+                    dispatchCriteria: AB1234567
                 rejected:
                   summary: Rejected identity
                   value:
@@ -84,6 +85,8 @@ paths:
                     referenceId: kyc-req-002
                     details:
                       reason: Invalid document
+                  x-microcks:
+                    dispatchCriteria: CD9876543
 
   /kyc/status/{nationalId}:
     get:
@@ -93,10 +96,8 @@ paths:
         - name: nationalId
           in: path
           required: true
-          description: National ID of the user
           schema:
             type: string
-            example: AB1234567
       responses:
         "200":
           description: KYC status found
@@ -107,23 +108,19 @@ paths:
                 properties:
                   nationalId:
                     type: string
-                    example: AB1234567
                   status:
                     type: string
                     enum: [VERIFIED, REJECTED, PENDING]
                   lastChecked:
                     type: string
                     format: date-time
-                    example: 2025-11-12T08:30:00Z
               examples:
                 verified:
-                  summary: Verified
                   value:
                     nationalId: AB1234567
                     status: VERIFIED
                     lastChecked: 2025-11-12T08:30:00Z
                 pending:
-                  summary: Pending
                   value:
                     nationalId: XY9876543
                     status: PENDING
@@ -134,4 +131,3 @@ paths:
             application/json:
               example:
                 message: "No KYC record found for given ID"
-
