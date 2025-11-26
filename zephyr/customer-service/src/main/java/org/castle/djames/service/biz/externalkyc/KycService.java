@@ -12,5 +12,5 @@ public interface KycService {
     @Path("/register")
     KycRegisterResponse register(KycRegisterRequest request);
 
-    
+
 }

@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.castle.djames.dto.CustomerDetailResponse;
 import org.castle.djames.dto.CustomerRequest;
 import org.castle.djames.service.CommandService;
+import org.castle.djames.validator.RequestValidator;
+import org.castle.djames.validator.groups.AddCustomerGroup;
 import org.jboss.resteasy.reactive.RestResponse;
 
 @Slf4j
@@ -16,6 +18,7 @@ import org.jboss.resteasy.reactive.RestResponse;
 public class CommandController {
 
     private CommandService commandService;
+    private RequestValidator requestValidator;
 
     /**
      * Handles customer onboarding by accepting customer details in the request
@@ -31,6 +34,7 @@ public class CommandController {
     @POST
     public RestResponse<CustomerDetailResponse> onboardCustomer(CustomerRequest request) {
         log.info("Received request to onboard customer: {}", request);
+        requestValidator.validate(request, AddCustomerGroup.class);
         var response = commandService.onboardCustomer(request);
         log.info("Customer onboarded successfully: {}", response);
         return RestResponse.ok(response);
