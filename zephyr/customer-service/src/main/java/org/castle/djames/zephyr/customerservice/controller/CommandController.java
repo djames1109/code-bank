@@ -36,9 +36,11 @@ public class CommandController {
     @POST
     public RestResponse<Response<CustomerDetailResponse>> onboardCustomer(CustomerRequest request) {
         log.info("Received request to onboard customer: {}", request);
+
         requestValidator.validate(request, AddCustomerGroup.class);
         var onboardCustomerResponse = commandService.onboardCustomer(request);
         var response = ResponseFactory.success(onboardCustomerResponse);
+
         log.info("Customer onboarded successfully: {}", response);
         return RestResponse.ok(response);
     }
@@ -54,7 +56,12 @@ public class CommandController {
      * such as ID, name, contact details, KYC status, and timestamps.
      */
     @PUT
-    public CustomerDetailResponse updateCustomer(CustomerRequest request) {
+    public RestResponse<Response<CustomerDetailResponse>> updateCustomer(CustomerRequest request) {
+        log.info("Received request to update customer: {}", request);
+
+        requestValidator.validate(request);
+
+
         return null;
     }
 

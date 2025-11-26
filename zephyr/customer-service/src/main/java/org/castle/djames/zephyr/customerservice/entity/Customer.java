@@ -5,12 +5,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.Optional;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Customer extends PanacheEntityBase {
 
@@ -33,4 +40,10 @@ public class Customer extends PanacheEntityBase {
     @UpdateTimestamp
     public Instant updatedDate;
 
+    /**
+     * Find a customer by national ID.
+     */
+    public static Optional<Customer> findByNationalId(String nationalId) {
+        return find("nationalId", nationalId).firstResultOptional();
+    }
 }

@@ -8,6 +8,11 @@ import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 @RegisterRestClient(configKey = "kyc-service")
 public interface KycService {
 
+    /**
+     * Registers a new user for KYC (Know Your Customer) verification through an external service.
+     * The registration request contains user details, and the response provides the status and reference details
+     * of the KYC process.
+     */
     @POST
     @Path("/register")
     KycRegisterResponse register(KycRegisterRequest request);
