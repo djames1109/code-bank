@@ -10,6 +10,8 @@ import org.castle.djames.zephyr.customerservice.dto.CustomerRequest;
 import org.castle.djames.zephyr.customerservice.service.CommandService;
 import org.castle.djames.zephyr.customerservice.validator.RequestValidator;
 import org.castle.djames.zephyr.customerservice.validator.groups.AddCustomerGroup;
+import org.castle.djames.zephyr.web.model.Response;
+import org.castle.djames.zephyr.web.model.ResponseFactory;
 import org.jboss.resteasy.reactive.RestResponse;
 
 @Slf4j
@@ -32,10 +34,11 @@ public class CommandController {
      * KYC status, and timestamps.
      */
     @POST
-    public RestResponse<CustomerDetailResponse> onboardCustomer(CustomerRequest request) {
+    public RestResponse<Response<CustomerDetailResponse>> onboardCustomer(CustomerRequest request) {
         log.info("Received request to onboard customer: {}", request);
         requestValidator.validate(request, AddCustomerGroup.class);
-        var response = commandService.onboardCustomer(request);
+        var onboardCustomerResponse = commandService.onboardCustomer(request);
+        var response = ResponseFactory.success(onboardCustomerResponse);
         log.info("Customer onboarded successfully: {}", response);
         return RestResponse.ok(response);
     }

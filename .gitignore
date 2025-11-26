@@ -31,3 +31,4 @@ replay_pid*
 .jpg
 
 .quarkus/
+target/
