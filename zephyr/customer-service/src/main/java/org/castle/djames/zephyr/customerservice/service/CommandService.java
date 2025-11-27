@@ -32,7 +32,7 @@ public class CommandService extends BaseCommandService {
     @Transactional
     public CustomerDetailResponse onboardCustomer(CustomerRequest customerRequest) {
         if (Customer.findByNationalId(customerRequest.nationalId()).isPresent()) {
-            throw new RuntimeException("National ID is already registered");
+            throw new RuntimeException("National ID is already registered"); //todo: custom exception
         }
 
         var registerRequest = buildKycRegisterRequest(customerRequest);
