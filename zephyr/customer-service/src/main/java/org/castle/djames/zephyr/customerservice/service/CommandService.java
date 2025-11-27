@@ -35,9 +35,7 @@ public class CommandService extends BaseCommandService {
             throw new RuntimeException("National ID is already registered"); //todo: custom exception
         }
 
-        var registerRequest = buildKycRegisterRequest(customerRequest);
-        var kycRegisterResponse = kycService.register(registerRequest);
-
+        var kycRegisterResponse = kycService.register(buildKycRegisterRequest(customerRequest));
         var customer = buildCustomer(customerRequest, kycRegisterResponse);
         customer.persist();
 

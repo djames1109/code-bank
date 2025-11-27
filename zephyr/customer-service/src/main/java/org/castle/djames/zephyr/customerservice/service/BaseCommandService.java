@@ -55,8 +55,8 @@ public abstract class BaseCommandService {
                 .build();
     }
 
-    protected Instant formatDate(String date) {
-        final var DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return LocalDate.parse(date, DATE_FORMATTER).atStartOfDay().toInstant(ZoneOffset.UTC);
+    private Instant formatDate(String date) {
+        final var dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return LocalDate.parse(date, dateFormatter).atStartOfDay().toInstant(ZoneOffset.UTC);
     }
 }
