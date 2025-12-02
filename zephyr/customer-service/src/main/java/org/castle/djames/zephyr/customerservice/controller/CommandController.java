@@ -31,7 +31,7 @@ public class CommandController {
      * and generating a response that encapsulates the customer's details.
      *
      * @param request the customer data encapsulated in a {@link CustomerRequest} object,
-     *                including first name, last name, national ID, birth date, email, phone, and address.
+     *                including first name, last name, national ID, birthdate, email, phone, and address.
      * @return a {@link RestResponse} object wrapping a {@link Response} with the onboarded customer's details,
      * encapsulated in a {@link CustomerDetailResponse}.
      * @throws ValidationException if the provided request data fails validation.
