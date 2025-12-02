@@ -11,6 +11,7 @@ import org.castle.djames.zephyr.customerservice.exception.ValidationException;
 import org.castle.djames.zephyr.customerservice.service.CommandService;
 import org.castle.djames.zephyr.customerservice.validator.RequestValidator;
 import org.castle.djames.zephyr.customerservice.validator.groups.AddCustomerGroup;
+import org.castle.djames.zephyr.customerservice.validator.groups.UpdateCustomerGroup;
 import org.castle.djames.zephyr.web.model.Response;
 import org.castle.djames.zephyr.web.model.ResponseFactory;
 import org.jboss.resteasy.reactive.RestPath;
@@ -24,7 +25,6 @@ public class CommandController {
     private CommandService commandService;
     private RequestValidator requestValidator;
 
-
     /**
      * Onboards a new customer based on the provided request data.
      * This process includes validating the request, performing customer registration,
@@ -35,7 +35,7 @@ public class CommandController {
      * @return a {@link RestResponse} object wrapping a {@link Response} with the onboarded customer's details,
      * encapsulated in a {@link CustomerDetailResponse}.
      * @throws ValidationException if the provided request data fails validation.
-     * @throws RuntimeException if a customer with the same national ID is already registered.
+     * @throws RuntimeException    if a customer with the same national ID is already registered.
      */
     @POST
     public RestResponse<Response<CustomerDetailResponse>> onboardCustomer(CustomerRequest request) {
@@ -65,10 +65,12 @@ public class CommandController {
                                                                          CustomerRequest request) {
         log.info("Received request to update customer: {}", request);
 
-        requestValidator.validate(request);
+        requestValidator.validate(request, UpdateCustomerGroup.class);
+        var updateCustomerResponse = commandService.updateCustomer(id, request);
+        var response = ResponseFactory.success(updateCustomerResponse);
 
-
-        return null;
+        log.info("Customer updated successfully: {}", response);
+        return RestResponse.ok(response);
     }
 
 }

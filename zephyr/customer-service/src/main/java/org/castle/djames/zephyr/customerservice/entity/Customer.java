@@ -5,9 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,6 +13,8 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Optional;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -23,26 +23,28 @@ public class Customer extends PanacheEntityBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
-    public String firstName;
-    public String lastName;
-    public String nationalId;
-    public LocalDate birthDate;
-    public String address;
-    public String email;
-    public String phone;
-    public KycStatus kycStatus;
-    public String kycReferenceId;
-    public Instant kycIssuedDate;
-    public Instant kycExpiryDate;
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String nationalId;
+    private LocalDate birthDate;
+    private String address;
+    private String email;
+    private String phone;
+    private KycStatus kycStatus;
+    private String kycReferenceId;
+    private Instant kycIssuedDate;
+    private Instant kycExpiryDate;
     @CreationTimestamp
-    public Instant createdDate;
+    private Instant createdDate;
     @UpdateTimestamp
-    public Instant updatedDate;
+    private Instant updatedDate;
 
-    /**
-     * Find a customer by national ID.
-     */
+
+    public static Optional<Customer> findById(Long id) {
+        return find("id", id).firstResultOptional();
+    }
+
     public static Optional<Customer> findByNationalId(String nationalId) {
         return find("nationalId", nationalId).firstResultOptional();
     }

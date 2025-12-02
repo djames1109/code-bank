@@ -11,6 +11,8 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
+import java.util.function.Consumer;
 
 public abstract class BaseCommandService {
 
@@ -26,14 +28,14 @@ public abstract class BaseCommandService {
 
     protected CustomerDetailResponse buildCustomerDetailResponse(Customer customer) {
         return CustomerDetailResponse.builder()
-                .id(customer.id)
-                .firstName(customer.firstName)
-                .lastName(customer.lastName)
-                .email(customer.email)
-                .phone(customer.phone)
-                .kycStatus(customer.kycStatus)
-                .kycIssuedDate(customer.kycIssuedDate)
-                .kycExpiryDate(customer.kycExpiryDate)
+                .id(customer.getId())
+                .firstName(customer.getFirstName())
+                .lastName(customer.getLastName())
+                .email(customer.getEmail())
+                .phone(customer.getPhone())
+                .kycStatus(customer.getKycStatus())
+                .kycIssuedDate(customer.getKycIssuedDate())
+                .kycExpiryDate(customer.getKycExpiryDate())
                 .createdDate(Instant.now())
                 .updatedDate(Instant.now())
                 .build();
@@ -53,6 +55,21 @@ public abstract class BaseCommandService {
                 .kycIssuedDate(formatDate(kycRegisterResponse.details().documentIssued()))
                 .kycExpiryDate(formatDate(kycRegisterResponse.details().documentExpiry()))
                 .build();
+    }
+
+    protected void updateCustomerFields(Customer customer, CustomerRequest request) {
+        updateIfPresent(request.firstName(), customer::setFirstName);
+        updateIfPresent(request.lastName(), customer::setLastName);
+        updateIfPresent(request.email(), customer::setEmail);
+        updateIfPresent(request.phone(), customer::setPhone);
+        updateIfPresent(request.address(), customer::setAddress);
+    }
+
+
+    private void updateIfPresent(String value, Consumer<String> updater) {
+        if (Objects.nonNull(value) && !value.isBlank()) {
+            updater.accept(value);
+        }
     }
 
     private Instant formatDate(String date) {

@@ -24,7 +24,7 @@ public class CommandService extends BaseCommandService {
      * If a customer with the provided national ID already exists, an exception is thrown.
      *
      * @param customerRequest the details of the customer to be onboarded,
-     *                        including first name, last name, national ID, birth date, email, phone, and address.
+     *                        including first name, last name, national ID, birthdate, email, phone, and address.
      * @return a {@code CustomerDetailResponse} object containing the details of the newly onboarded customer,
      * including KYC status and associated metadata.
      * @throws RuntimeException if a customer with the same national ID already exists in the system.
@@ -32,7 +32,7 @@ public class CommandService extends BaseCommandService {
     @Transactional
     public CustomerDetailResponse onboardCustomer(CustomerRequest customerRequest) {
         if (Customer.findByNationalId(customerRequest.nationalId()).isPresent()) {
-            throw new RuntimeException("National ID is already registered"); //todo: custom exception
+            throw new RuntimeException("National ID is already registered");
         }
 
         var kycRegisterResponse = kycService.register(buildKycRegisterRequest(customerRequest));
@@ -41,5 +41,24 @@ public class CommandService extends BaseCommandService {
 
         return buildCustomerDetailResponse(customer);
     }
+
+    /**
+     * Updates the details of an existing customer identified by the given ID.
+     * The method retrieves the customer from the database, throws an exception if the customer
+     * is not found, and updates their details based on the information provided in the request.
+     *
+     * @param id      the unique identifier of the customer to be updated
+     * @param request the details to update for the customer, including fields such as first name,
+     *                last name, email, phone, and address
+     * @return a {@code CustomerDetailResponse} object containing the updated details of the customer
+     * @throws RuntimeException if the customer with the given ID is not found in the system
+     */
+    @Transactional
+    public CustomerDetailResponse updateCustomer(Long id, CustomerRequest request) {
+        var customer = Customer.findById(id).orElseThrow(() -> new RuntimeException("Customer not found"));
+        updateCustomerFields(customer, request);
+        return buildCustomerDetailResponse(customer);
+    }
+
 
 }

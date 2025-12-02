@@ -5,12 +5,14 @@ import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.castle.djames.zephyr.customerservice.dto.CustomerRequest;
 import org.castle.djames.zephyr.customerservice.validator.groups.AddCustomerGroup;
+import org.castle.djames.zephyr.customerservice.validator.groups.UpdateCustomerGroup;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class RequestValidatorTest {
 
@@ -22,8 +24,10 @@ class RequestValidatorTest {
         validator = factory.getValidator();
     }
 
+//    ========== REGISTER CUSTOMER
+
     @Test
-    void testValidateCustomerRequest_validInput_noViolations() {
+    void testValidateRegisterCustomerRequest_validInput_noViolations() {
         CustomerRequest request = new CustomerRequest(
                 "John",
                 "Doe",
@@ -39,7 +43,7 @@ class RequestValidatorTest {
     }
 
     @Test
-    void testValidateCustomerRequest_emptyFirstName_hasViolation() {
+    void testValidateRegisterCustomerRequest_emptyFirstName_hasViolation() {
         CustomerRequest request = new CustomerRequest(
                 "",
                 "Doe",
@@ -56,7 +60,7 @@ class RequestValidatorTest {
     }
 
     @Test
-    void testValidateCustomerRequest_emptyLastName_hasViolation() {
+    void testValidateRegisterCustomerRequest_emptyLastName_hasViolation() {
         CustomerRequest request = new CustomerRequest(
                 "John",
                 "",
@@ -73,7 +77,7 @@ class RequestValidatorTest {
     }
 
     @Test
-    void testValidateCustomerRequest_emptyNationalId_hasViolation() {
+    void testValidateRegisterCustomerRequest_emptyNationalId_hasViolation() {
         CustomerRequest request = new CustomerRequest(
                 "John",
                 "Doe",
@@ -90,7 +94,7 @@ class RequestValidatorTest {
     }
 
     @Test
-    void testValidateCustomerRequest_nullBirthDate_hasViolation() {
+    void testValidateRegisterCustomerRequest_nullBirthDate_hasViolation() {
         CustomerRequest request = new CustomerRequest(
                 "John",
                 "Doe",
@@ -107,7 +111,7 @@ class RequestValidatorTest {
     }
 
     @Test
-    void testValidateCustomerRequest_invalidEmail_hasViolation() {
+    void testValidateRegisterCustomerRequest_invalidEmail_hasViolation() {
         CustomerRequest request = new CustomerRequest(
                 "John",
                 "Doe",
@@ -124,7 +128,7 @@ class RequestValidatorTest {
     }
 
     @Test
-    void testValidateCustomerRequest_emptyPhone_hasViolation() {
+    void testValidateRegisterCustomerRequest_emptyPhone_hasViolation() {
         CustomerRequest request = new CustomerRequest(
                 "John",
                 "Doe",
@@ -141,7 +145,7 @@ class RequestValidatorTest {
     }
 
     @Test
-    void testValidateCustomerRequest_emptyAddress_hasViolation() {
+    void testValidateRegisterCustomerRequest_emptyAddress_hasViolation() {
         CustomerRequest request = new CustomerRequest(
                 "John",
                 "Doe",
@@ -155,6 +159,41 @@ class RequestValidatorTest {
         var violations = validator.validate(request, AddCustomerGroup.class);
         assertEquals(1, violations.size());
         assertEquals("address", violations.iterator().next().getPropertyPath().toString());
+    }
+
+//    ========== UPDATE CUSTOMER
+
+    @Test
+    void testValidateUpdateCustomerRequest_validInput_noViolations() {
+        CustomerRequest request = new CustomerRequest(
+                null,
+                null,
+                null,
+                null,
+                "john.doe@example.com",
+                null,
+                null
+        );
+
+        var violations = validator.validate(request, UpdateCustomerGroup.class);
+        assertTrue(violations.isEmpty());
+    }
+
+    @Test
+    void testValidateUpdateCustomerRequest_invalidEmail_hasViolation() {
+        CustomerRequest request = new CustomerRequest(
+                null,
+                null,
+                null,
+                null,
+                "invalid-email",
+                null,
+                null
+        );
+
+        var violations = validator.validate(request, UpdateCustomerGroup.class);
+        assertEquals(1, violations.size());
+        assertEquals("email", violations.iterator().next().getPropertyPath().toString());
     }
 
 }
