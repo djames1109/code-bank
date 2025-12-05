@@ -29,14 +29,10 @@ public class QueryController {
     @GET
     @Path("/{id}")
     public CustomerDetailResponse getCustomerDetails(@PathParam("id") String id) {
-        return CustomerDetailResponse.builder()
-                .id(1L)
-                .firstName("John")
-                .lastName("Doe")
-                .email("john.doe@example.com")
-                .phone("+1234567890")
-                .kycStatus(KycStatus.VERIFIED)
-                .build();
+
+        return CustomerDetailResponse.builder().id(1L).firstName("John")
+            .lastName("Doe").email("john.doe@example.com").phone("+1234567890")
+            .kycStatus(KycStatus.VERIFIED).build();
     }
 
     /**
@@ -49,6 +45,7 @@ public class QueryController {
     @GET
     @Path("/validate/{id}")
     public CustomerValidationResponse validateCustomer(@PathParam("id") String id) {
+
         return null;
     }
 

@@ -17,7 +17,6 @@ public class CommandService extends BaseCommandService {
         this.kycService = kycService;
     }
 
-
     /**
      * Onboards a new customer into the system. This includes performing KYC (Know Your Customer)
      * registration via an external service and saving the customer details to the database.
@@ -30,12 +29,15 @@ public class CommandService extends BaseCommandService {
      * @throws RuntimeException if a customer with the same national ID already exists in the system.
      */
     @Transactional
-    public CustomerDetailResponse onboardCustomer(CustomerRequest customerRequest) {
-        if (Customer.findByNationalId(customerRequest.nationalId()).isPresent()) {
+    public CustomerDetailResponse onboardCustomer(
+        CustomerRequest customerRequest) {
+        if (Customer.findByNationalId(customerRequest.nationalId())
+            .isPresent()) {
             throw new RuntimeException("National ID is already registered");
         }
 
-        var kycRegisterResponse = kycService.register(buildKycRegisterRequest(customerRequest));
+        var kycRegisterResponse =
+            kycService.register(buildKycRegisterRequest(customerRequest));
         var customer = buildCustomer(customerRequest, kycRegisterResponse);
         customer.persist();
 
@@ -54,11 +56,12 @@ public class CommandService extends BaseCommandService {
      * @throws RuntimeException if the customer with the given ID is not found in the system
      */
     @Transactional
-    public CustomerDetailResponse updateCustomer(Long id, CustomerRequest request) {
-        var customer = Customer.findById(id).orElseThrow(() -> new RuntimeException("Customer not found"));
+    public CustomerDetailResponse updateCustomer(Long id,
+                                                 CustomerRequest request) {
+        var customer = Customer.findById(id)
+            .orElseThrow(() -> new RuntimeException("Customer not found"));
         updateCustomerFields(customer, request);
         return buildCustomerDetailResponse(customer);
     }
-
 
 }

@@ -5,13 +5,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Optional;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -39,7 +42,6 @@ public class Customer extends PanacheEntityBase {
     private Instant createdDate;
     @UpdateTimestamp
     private Instant updatedDate;
-
 
     public static Optional<Customer> findById(Long id) {
         return find("id", id).firstResultOptional();

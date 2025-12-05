@@ -18,11 +18,13 @@ public class ExternalServiceLogInterceptor implements ClientLogger {
 
     @Override
     public void logResponse(HttpClientResponse response, boolean redirect) {
-        log.info("Response: status: {}, body: {}", response.statusCode(), response.body());
+        log.info("Response: status: {}, body: {}", response.statusCode(),
+            response.body());
     }
 
     @Override
-    public void logRequest(HttpClientRequest request, Buffer body, boolean omitBody) {
+    public void logRequest(HttpClientRequest request, Buffer body,
+                           boolean omitBody) {
         log.info("Request: headers: {}, body: {}", request.headers(), body);
     }
 }

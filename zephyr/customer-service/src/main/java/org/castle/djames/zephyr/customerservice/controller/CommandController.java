@@ -49,7 +49,6 @@ public class CommandController {
         return RestResponse.ok(response);
     }
 
-
     /**
      * Updates an existing customer's information based on the provided request data.
      *
@@ -61,8 +60,7 @@ public class CommandController {
      */
     @PUT
     @Path("/{id}")
-    public RestResponse<Response<CustomerDetailResponse>> updateCustomer(@RestPath Long id,
-                                                                         CustomerRequest request) {
+    public RestResponse<Response<CustomerDetailResponse>> updateCustomer(@RestPath Long id, CustomerRequest request) {
         log.info("Received request to update customer: {}", request);
 
         requestValidator.validate(request, UpdateCustomerGroup.class);
