@@ -52,8 +52,7 @@ public abstract class BaseCommandService {
             .build();
     }
 
-    protected void updateCustomerFields(Customer customer,
-                                        CustomerRequest request) {
+    protected void updateCustomerFields(Customer customer, CustomerRequest request) {
         updateIfPresent(request.firstName(), customer::setFirstName);
         updateIfPresent(request.lastName(), customer::setLastName);
         updateIfPresent(request.email(), customer::setEmail);

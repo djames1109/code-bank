@@ -17,5 +17,4 @@ public class RequestValidator {
             throw new ValidationException(violations.toString());
         }
     }
-
 }
