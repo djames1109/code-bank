@@ -7,8 +7,7 @@ import org.eclipse.microprofile.rest.client.ext.ResponseExceptionMapper;
 
 @Slf4j
 @Provider
-public class ExternalServiceExceptionMapper
-    implements ResponseExceptionMapper<RuntimeException> {
+public class ExternalServiceExceptionMapper implements ResponseExceptionMapper<RuntimeException> {
 
     @Override
     public RuntimeException toThrowable(Response response) {

@@ -4,7 +4,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 import org.castle.djames.zephyr.customerservice.dto.CustomerDetailResponse;
 import org.castle.djames.zephyr.customerservice.dto.CustomerRequest;
-import org.castle.djames.zephyr.customerservice.entity.Customer;
+import org.castle.djames.zephyr.customerservice.exception.DuplicateCustomerException;
+import org.castle.djames.zephyr.customerservice.repository.CustomerRepository;
 import org.castle.djames.zephyr.customerservice.service.biz.externalkyc.KycService;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
@@ -12,9 +13,12 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 public class CommandService extends BaseCommandService {
 
     private final KycService kycService;
+    private final CustomerRepository customerRepository;
 
-    public CommandService(@RestClient KycService kycService) {
+    public CommandService(@RestClient KycService kycService,
+                          CustomerRepository customerRepository) {
         this.kycService = kycService;
+        this.customerRepository = customerRepository;
     }
 
     /**
@@ -30,8 +34,8 @@ public class CommandService extends BaseCommandService {
      */
     @Transactional
     public CustomerDetailResponse onboardCustomer(CustomerRequest customerRequest) {
-        if (Customer.findByNationalId(customerRequest.nationalId()).isPresent()) {
-            throw new RuntimeException("National ID is already registered");
+        if (customerRepository.findByNationalId(customerRequest.nationalId()).isPresent()) {
+            throw new DuplicateCustomerException("National ID is already registered");
         }
 
         var kycRegisterResponse = kycService.register(buildKycRegisterRequest(customerRequest));
@@ -54,7 +58,7 @@ public class CommandService extends BaseCommandService {
      */
     @Transactional
     public CustomerDetailResponse updateCustomer(Long id, CustomerRequest request) {
-        var customer = Customer.findById(id)
+        var customer = customerRepository.findByIdOptional(id)
             .orElseThrow(() -> new RuntimeException("Customer not found"));
         updateCustomerFields(customer, request);
         return buildCustomerDetailResponse(customer);

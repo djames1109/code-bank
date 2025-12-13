@@ -43,11 +43,4 @@ public class Customer extends PanacheEntityBase {
     @UpdateTimestamp
     private Instant updatedDate;
 
-    public static Optional<Customer> findById(Long id) {
-        return find("id", id).firstResultOptional();
-    }
-
-    public static Optional<Customer> findByNationalId(String nationalId) {
-        return find("nationalId", nationalId).firstResultOptional();
-    }
 }
