@@ -40,7 +40,7 @@ public class CommandService extends BaseCommandService {
 
         var kycRegisterResponse = kycService.register(buildKycRegisterRequest(customerRequest));
         var customer = buildCustomer(customerRequest, kycRegisterResponse);
-        customer.persist();
+        customerRepository.persist(customer);
 
         return buildCustomerDetailResponse(customer);
     }
