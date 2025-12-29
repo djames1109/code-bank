@@ -25,11 +25,13 @@ public abstract class BaseCommandService {
             .email(customerRequest.email()).build();
     }
 
-    protected CustomerDetailResponse buildCustomerDetailResponse(
-        Customer customer) {
-        return CustomerDetailResponse.builder().id(customer.getId())
-            .firstName(customer.getFirstName()).lastName(customer.getLastName())
-            .email(customer.getEmail()).phone(customer.getPhone())
+    protected CustomerDetailResponse buildCustomerDetailResponse(Customer customer) {
+        return CustomerDetailResponse.builder()
+            .id(customer.getId())
+            .firstName(customer.getFirstName())
+            .lastName(customer.getLastName())
+            .email(customer.getEmail())
+            .phone(customer.getPhone())
             .kycStatus(customer.getKycStatus())
             .kycIssuedDate(customer.getKycIssuedDate())
             .kycExpiryDate(customer.getKycExpiryDate())
