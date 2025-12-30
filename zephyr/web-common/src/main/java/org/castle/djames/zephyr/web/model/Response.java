@@ -1,8 +1,7 @@
 package org.castle.djames.zephyr.web.model;
 
-import lombok.Builder;
-
 import java.util.List;
+import lombok.Builder;
 
 @Builder
 public record Response<T>(ResponseStatus status,

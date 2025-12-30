@@ -5,6 +5,7 @@ import lombok.Getter;
 public enum ResponseCode {
     SUCCESS("S000", "Success."),
     ERROR("E000", "Error encountered while processing request."),
+    VALIDATION_ERROR("E001", "Validation error encountered while processing request."),
     ;
 
     @Getter
