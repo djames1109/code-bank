@@ -33,12 +33,13 @@ public class GlobalExceptionHandler implements ExceptionMapper<Exception> {
     private Response handleValidationException(ValidationException exception) {
         log.error("Validation error: {}", exception.getMessage());
 
-        var errorDetail = ErrorDetail.builder()
-            .message(exception.getMessage())
-            .component(SVC_COMPONENT)
-            .build();
+        var errorDetails = exception.getViolations().stream().map(e -> ErrorDetail.builder()
+                .message(e)
+                .component(SVC_COMPONENT)
+                .build())
+            .toList();
 
-        var response = ResponseFactory.failure(ResponseCode.VALIDATION_ERROR, List.of(errorDetail));
+        var response = ResponseFactory.failure(ResponseCode.VALIDATION_ERROR, errorDetails);
 
         return Response.status(Response.Status.BAD_REQUEST)
             .entity(response)

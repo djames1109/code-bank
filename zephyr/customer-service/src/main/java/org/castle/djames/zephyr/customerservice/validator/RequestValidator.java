@@ -18,7 +18,7 @@ public class RequestValidator {
             var messages = violations.stream()
                 .map(this::formatViolation)
                 .toList();
-            throw new ValidationException(String.join(", ", messages));
+            throw new ValidationException(messages);
         }
     }
 
